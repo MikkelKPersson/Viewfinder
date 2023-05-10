@@ -9,16 +9,21 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private void cameraView_CamerasLoaded(object sender, EventArgs e)
+    {
+		cameraView.Camera = cameraView.Cameras.First();
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+		MainThread.BeginInvokeOnMainThread(async () => {
+			
+			await cameraView.StopCameraAsync();
+            await cameraView.StartCameraAsync();
+        });
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+		myImage.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
+    }
 }
 
