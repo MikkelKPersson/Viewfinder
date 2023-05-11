@@ -1,17 +1,24 @@
-﻿namespace Viewfinder;
+﻿using Viewfinder.Services;
+
+namespace Viewfinder;
 
 public partial class MainPage : ContentPage
 {
     //private ICameraInfoService _cameraInfoService;
 
-    public MainPage(ITestService test)
+    public MainPage(ITestService test, ICameraInfoService cameraInfoService)
 	{
         InitializeComponent();
 
 #if __ANDROID__
         
         string testString = test.GetTestString();
-        FocalLengthLabel.Text = testString;
+        TestLabel.Text = testString;
+#endif
+
+#if __ANDROID__
+        float? focalLength = cameraInfoService.GetFocalLength();
+        FocalLengthLabel.Text = $"Focal Length: {focalLength}";
 #endif
 
         /*#if __ANDROID__

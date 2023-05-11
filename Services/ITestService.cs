@@ -1,4 +1,4 @@
-﻿namespace Viewfinder
+﻿namespace Viewfinder.Services
 {
     public interface ITestService
     {

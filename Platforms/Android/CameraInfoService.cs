@@ -1,12 +1,8 @@
-﻿// CameraInfoService.cs in Android project
-
-using Android.Hardware.Camera2;
-using Viewfinder.Droid;
+﻿using Android.Hardware.Camera2;
+using Android.Content;
 using Viewfinder.Services;
 
-[assembly: Dependency(typeof(CameraInfoService))]
-
-namespace Viewfinder.Droid
+namespace Viewfinder.Platforms
 {
     public class CameraInfoService : ICameraInfoService
     {
@@ -16,7 +12,7 @@ namespace Viewfinder.Droid
 
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
             {
-                var cameraManager = (CameraManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.CameraService);
+                var cameraManager = (CameraManager)Android.App.Application.Context.GetSystemService(Context.CameraService);
                 foreach (var cameraId in cameraManager.GetCameraIdList())
                 {
                     var characteristics = cameraManager.GetCameraCharacteristics(cameraId);
