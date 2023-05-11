@@ -1,13 +1,23 @@
-﻿namespace Viewfinder;
+﻿using Viewfinder.Droid;
+using Viewfinder.Services;
+
+namespace Viewfinder;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    //private ICameraInfoService _cameraInfoService;
 
-	public MainPage()
+    public MainPage()
 	{
 		InitializeComponent();
-	}
+
+        #if __ANDROID__
+                ICameraInfoService cameraInfoService = DependencyService.Get<ICameraInfoService>();
+                float? focalLength = cameraInfoService.GetFocalLength();
+                FocalLengthLabel.Text = $"Focal Length: {focalLength}";
+        #endif  
+        
+    }
 
     private void cameraView_CamerasLoaded(object sender, EventArgs e)
     {
@@ -25,5 +35,6 @@ public partial class MainPage : ContentPage
     {
 		myImage.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);
     }
+
 }
 

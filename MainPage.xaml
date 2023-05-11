@@ -19,6 +19,8 @@
 
             <Image x:Name="myImage" WidthRequest="200" HeightRequest="200" />
 
+            <Label x:Name="FocalLengthLabel" Text="Focal Length: " />
+
 
 
         </VerticalStackLayout>
