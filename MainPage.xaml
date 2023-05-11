@@ -12,7 +12,7 @@
             HorizontalOptions="Fill">
 
             <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="300" 
-                           CamerasLoaded="cameraView_CamerasLoaded"
+                           CamerasLoaded="CameraView_CamerasLoaded"
                            />
 
             <Button Text="Capture" Clicked="Button_Clicked" />
