@@ -59,16 +59,26 @@ public partial class MainPage : ContentPage
 
     private void CameraView_CamerasLoaded(object sender, EventArgs e)
     {
-		cameraView.Camera = cameraView.Cameras.First();
+        cameraView.Camera = cameraView.Cameras.First();
 
-		MainThread.BeginInvokeOnMainThread(async () => {
-			
-			await cameraView.StopCameraAsync();
+        foreach (var camera in cameraView.Cameras)
+        {
+            var button = new Button { Text = camera.Name };
+            button.Clicked += async (s, args) =>
+            {
+                await cameraView.StopCameraAsync();
+                cameraView.Camera = camera;
+                await cameraView.StartCameraAsync();
+            };
+
+            cameraButtonsLayout.Children.Add(button);
+        }
+
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await cameraView.StopCameraAsync();
             await cameraView.StartCameraAsync();
         });
-
-
-
     }
 
     private void Button_Clicked(object sender, EventArgs e)
