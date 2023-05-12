@@ -8,7 +8,7 @@ namespace Viewfinder.Services
 {
     public interface ICameraInfoService
     {
-        float? GetFocalLength();
+        float? GetFocalLength(string cameraId);
     }
 
 

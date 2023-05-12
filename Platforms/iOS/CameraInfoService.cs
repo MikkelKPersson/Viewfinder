@@ -2,11 +2,16 @@
 
 namespace Viewfinder.iOS
 {
+    // in CameraInfoService.cs in your iOS project
     public class CameraInfoService : ICameraInfoService
     {
-        public float? GetFocalLength()
+        // your existing methods...
+
+        public float? GetFocalLength(string cameraId)
         {
-            return null; // or some default value
+            // For now, we do nothing and return null
+            // because this functionality is not implemented on iOS.
+            return null;
         }
     }
 }

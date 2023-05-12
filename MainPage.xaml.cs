@@ -4,33 +4,42 @@ namespace Viewfinder;
 
 public partial class MainPage : ContentPage
 {
-    //private ICameraInfoService _cameraInfoService;
+    private readonly ICameraInfoService _cameraInfoService;
 
     public MainPage(ITestService test, ICameraInfoService cameraInfoService)
 	{
         InitializeComponent();
 
-#if __ANDROID__
-        
-        string testString = test.GetTestString();
-        TestLabel.Text = testString;
-#endif
+        _cameraInfoService = cameraInfoService;
 
-#if __ANDROID__
-        float? focalLength = cameraInfoService.GetFocalLength();
-        FocalLengthLabel.Text = $"Focal Length: {focalLength}";
-#endif
+        /*
+        #if __ANDROID__
+
+                string testString = test.GetTestString();
+                TestLabel.Text = testString;
+        #endif
+
+        #if __ANDROID__
+                float? focalLength = cameraInfoService.GetFocalLength();
+                FocalLengthLabel.Text = $"Focal Length: {focalLength}";
+        #endif
+        */
 
     }
 
     private void CameraView_CamerasLoaded(object sender, EventArgs e)
     {
+        
         cameraView.Camera = cameraView.Cameras.First();
 
         for (int i = 0; i < cameraView.Cameras.Count; i++)
         {
             var camera = cameraView.Cameras[i];
-            var button = new Button { Text = $"Camera {i + 1}: {camera.Name}" };
+
+
+            float? focalLength = _cameraInfoService.GetFocalLength(i.ToString());
+
+            var button = new Button { Text = $"Camera {i + 1}: {camera.Name} - Focal Length: {focalLength}" };
             button.Clicked += async (s, args) =>
             {
                 await cameraView.StopCameraAsync();
