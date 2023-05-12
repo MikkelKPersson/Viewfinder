@@ -14,8 +14,8 @@
             <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="300" 
                            CamerasLoaded="CameraView_CamerasLoaded"
                            />
-            
-            <StackLayout x:Name="cameraButtonsLayout" Orientation="Horizontal" />
+
+            <FlexLayout x:Name="cameraButtonsLayout" Wrap="Wrap" Direction="Row" AlignItems="Start" />
 
             <Button Text="Capture" Clicked="Button_Clicked" />
 

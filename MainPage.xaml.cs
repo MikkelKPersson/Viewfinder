@@ -21,49 +21,16 @@ public partial class MainPage : ContentPage
         FocalLengthLabel.Text = $"Focal Length: {focalLength}";
 #endif
 
-        /*#if __ANDROID__
-                try
-                {
-                    ICameraInfoService cameraInfoService = DependencyService.Get<ICameraInfoService>();
-                    float? focalLength = cameraInfoService.GetFocalLength();
-                    if (focalLength == null)
-                    {
-                        FocalLengthLabel.Text = "Focal length is null.";
-                    }
-                    else
-                    {
-                        FocalLengthLabel.Text = $"Focal Length: {focalLength}";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    FocalLengthLabel.Text = $"Exception occurred: {ex.Message}";
-                }
-        #endif
-
-        ICameraInfoService cameraInfoService = DependencyService.Get<ICameraInfoService>();
-
-        if (cameraInfoService == null)
-        {
-            System.Diagnostics.Debug.WriteLine("cameraInfoService is null");
-            FocalLengthLabel.Text = "cameraInfoService is null";
-        }
-        else
-        {
-            float? focalLength = cameraInfoService.GetFocalLength();
-            FocalLengthLabel.Text = $"Focal Length: {focalLength}";
-        }*/
-
     }
 
     private void CameraView_CamerasLoaded(object sender, EventArgs e)
     {
         cameraView.Camera = cameraView.Cameras.First();
 
-        foreach (var camera in cameraView.Cameras)
+        for (int i = 0; i < cameraView.Cameras.Count; i++)
         {
-            var button = new Button { Text = camera.Name };
+            var camera = cameraView.Cameras[i];
+            var button = new Button { Text = $"Camera {i + 1}: {camera.Name}" };
             button.Clicked += async (s, args) =>
             {
                 await cameraView.StopCameraAsync();
