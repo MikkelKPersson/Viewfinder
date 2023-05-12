@@ -1,10 +1,9 @@
 ﻿using Camera.MAUI;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.PlatformConfiguration;
-using Viewfinder;
-using Viewfinder.Platforms;
 using Viewfinder.Services;
+#if __ANDROID__
+using Viewfinder.Platforms;
+#endif
 
 namespace Viewfinder;
 
@@ -21,8 +20,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+#if __ANDROID__
 		builder.Services.AddTransient<ITestService, TestService>();
         builder.Services.AddTransient<ICameraInfoService, CameraInfoService>();
+        
+
+#endif
         builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
