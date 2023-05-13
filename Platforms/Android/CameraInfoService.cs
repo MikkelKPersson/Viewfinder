@@ -2,6 +2,7 @@
 using Android.Content;
 using Viewfinder.Services;
 
+
 namespace Viewfinder.Platforms
 {
     public class CameraInfoService : ICameraInfoService
@@ -26,6 +27,26 @@ namespace Viewfinder.Platforms
             }
 
             return focalLength;
+        }
+
+        public SizeF? GetSensorSize(string cameraId)
+        {
+            SizeF? sensorSize = null;
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            {
+                var cameraManager = (CameraManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.CameraService);
+                var characteristics = cameraManager.GetCameraCharacteristics(cameraId);
+                var sensorInfo = characteristics.Get(CameraCharacteristics.SensorInfoPhysicalSize);
+
+                if (sensorInfo != null)
+                {
+                    Android.Util.SizeF androidSize = (Android.Util.SizeF)sensorInfo;
+                    sensorSize = new SizeF(androidSize.Width, androidSize.Height);
+                }
+            }
+
+            return sensorSize;
         }
     }
 }

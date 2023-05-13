@@ -1,5 +1,6 @@
 ﻿using Viewfinder.Services;
 
+
 namespace Viewfinder;
 
 public partial class MainPage : ContentPage
@@ -38,13 +39,19 @@ public partial class MainPage : ContentPage
 
 
             float? focalLength = _cameraInfoService.GetFocalLength(i.ToString());
+            SizeF? sensorSize = _cameraInfoService.GetSensorSize(i.ToString());
 
-            var button = new Button { Text = $"Camera {i + 1}: {camera.Name} - Focal Length: {focalLength}" };
+            var button = new Button
+            {
+                Text = $"Camera {i + 1}: {camera.Name} - Focal Length: {focalLength}, Sensor Size: {sensorSize}",
+                LineBreakMode = LineBreakMode.WordWrap
+            };
             button.Clicked += async (s, args) =>
             {
                 await cameraView.StopCameraAsync();
                 cameraView.Camera = camera;
                 await cameraView.StartCameraAsync();
+                myImage.Source = cameraView.GetSnapShot(Camera.MAUI.ImageFormat.PNG);  // Update the image
             };
 
             cameraButtonsLayout.Children.Add(button);
