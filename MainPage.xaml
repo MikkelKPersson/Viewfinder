@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             x:Class="Viewfinder.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill">
+
+            <cv:CameraView x:Name="cameraView"  
+                           CamerasLoaded="CameraView_CamerasLoaded"
+                           Background="RED"
+                           HorizontalOptions="Fill"
+                           WidthRequest="100"
+                           HeightRequest="600"
+                           
+                           />
+
+            <FlexLayout x:Name="cameraButtonsLayout" Wrap="Wrap" Direction="Row" AlignItems="Start" />
+
+            <Button Text="Capture" Clicked="Button_Clicked"  />
+
+            <Image x:Name="myImage" WidthRequest="200" HeightRequest="200" />
+
+            <Label x:Name="TestLabel" Text="Test: " />
+
+            <Label x:Name="FocalLengthLabel" Text="Focal Length: " />
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
