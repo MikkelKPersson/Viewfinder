@@ -1,9 +1,11 @@
 ﻿
 namespace Viewfinder.Services
 {
-    interface ICameraService
+    public interface ICameraService
     {
-        void OpenCamera();
+        Task StartCamera();
+        Task StopCamera();
+        // add other methods as needed
     }
 }
 
