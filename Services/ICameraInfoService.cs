@@ -9,7 +9,6 @@ namespace Viewfinder.Services
     public interface ICameraInfoService
     {
         float? GetFocalLength(string cameraId);
-        SizeF? GetSensorSize(string cameraId);
     }
 
 

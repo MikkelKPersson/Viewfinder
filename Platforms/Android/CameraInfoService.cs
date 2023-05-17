@@ -2,7 +2,6 @@
 using Android.Content;
 using Viewfinder.Services;
 
-
 namespace Viewfinder.Platforms
 {
     public class CameraInfoService : ICameraInfoService
@@ -28,6 +27,7 @@ namespace Viewfinder.Platforms
 
             return focalLength;
         }
+<<<<<<< HEAD
 
         public SizeF? GetSensorSize(string cameraId)
         {
@@ -48,5 +48,7 @@ namespace Viewfinder.Platforms
 
             return sensorSize;
         }
+=======
+>>>>>>> parent of ad688c6 (Before implementing native plateform camera)
     }
 }
