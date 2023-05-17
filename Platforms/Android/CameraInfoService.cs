@@ -11,9 +11,9 @@ namespace Viewfinder.Platforms
         {
             float? focalLength = null;
 
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            if (global::Android.OS.Build.VERSION.SdkInt >= global::Android.OS.BuildVersionCodes.Lollipop)
             {
-                var cameraManager = (CameraManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.CameraService);
+                var cameraManager = (CameraManager)global::Android.App.Application.Context.GetSystemService(Context.CameraService);
                 var characteristics = cameraManager.GetCameraCharacteristics(cameraId);
                 var lensInfo = characteristics.Get(CameraCharacteristics.LensInfoAvailableFocalLengths);
                 if (lensInfo != null)
@@ -33,15 +33,15 @@ namespace Viewfinder.Platforms
         {
             SizeF? sensorSize = null;
 
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            if (global::Android.OS.Build.VERSION.SdkInt >= global::Android.OS.BuildVersionCodes.Lollipop)
             {
-                var cameraManager = (CameraManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.CameraService);
+                var cameraManager = (CameraManager)global::Android.App.Application.Context.GetSystemService(Context.CameraService);
                 var characteristics = cameraManager.GetCameraCharacteristics(cameraId);
                 var sensorInfo = characteristics.Get(CameraCharacteristics.SensorInfoPhysicalSize);
 
                 if (sensorInfo != null)
                 {
-                    Android.Util.SizeF androidSize = (Android.Util.SizeF)sensorInfo;
+                    global::Android.Util.SizeF androidSize = (global::Android.Util.SizeF)sensorInfo;
                     sensorSize = new SizeF(androidSize.Width, androidSize.Height);
                 }
             }

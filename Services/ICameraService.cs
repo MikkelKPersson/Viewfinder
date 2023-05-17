@@ -1,9 +1,8 @@
-﻿
-namespace Viewfinder.Services
+﻿namespace Viewfinder.Services
 {
-    interface ICameraService
+    public interface ICameraService
     {
         void OpenCamera();
+        void StartPreviewSession(object surface);
     }
 }
-

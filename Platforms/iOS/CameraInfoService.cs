@@ -13,5 +13,10 @@ namespace Viewfinder.iOS
             // because this functionality is not implemented on iOS.
             return null;
         }
+
+        public SizeF? GetSensorSize(string cameraId)
+        {
+            return null;
+        }
     }
 }
