@@ -2,6 +2,7 @@
 using Android.Content;
 using Viewfinder.Services;
 
+
 namespace Viewfinder.Platforms
 {
     public class CameraInfoService : ICameraInfoService
@@ -12,7 +13,7 @@ namespace Viewfinder.Platforms
 
             if (global::Android.OS.Build.VERSION.SdkInt >= global::Android.OS.BuildVersionCodes.Lollipop)
             {
-                var cameraManager = (CameraManager)global::Android.App.Application.Context.GetSystemService(Context.CameraService);
+                var cameraManager = (CameraManager)global::Android.App.Application.Context.GetSystemService(global::Android.Content.Context.CameraService);
                 var characteristics = cameraManager.GetCameraCharacteristics(cameraId);
                 var lensInfo = characteristics.Get(CameraCharacteristics.LensInfoAvailableFocalLengths);
                 if (lensInfo != null)
@@ -27,7 +28,6 @@ namespace Viewfinder.Platforms
 
             return focalLength;
         }
-<<<<<<< HEAD
 
         public SizeF? GetSensorSize(string cameraId)
         {
@@ -35,7 +35,7 @@ namespace Viewfinder.Platforms
 
             if (global::Android.OS.Build.VERSION.SdkInt >= global::Android.OS.BuildVersionCodes.Lollipop)
             {
-                var cameraManager = (CameraManager)global::Android.App.Application.Context.GetSystemService(Context.CameraService);
+                var cameraManager = (CameraManager)global::Android.App.Application.Context.GetSystemService(global::Android.Content.Context.CameraService);
                 var characteristics = cameraManager.GetCameraCharacteristics(cameraId);
                 var sensorInfo = characteristics.Get(CameraCharacteristics.SensorInfoPhysicalSize);
 
@@ -48,7 +48,5 @@ namespace Viewfinder.Platforms
 
             return sensorSize;
         }
-=======
->>>>>>> parent of ad688c6 (Before implementing native plateform camera)
     }
 }

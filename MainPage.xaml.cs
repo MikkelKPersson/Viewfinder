@@ -5,12 +5,14 @@ namespace Viewfinder;
 public partial class MainPage : ContentPage
 {
     private readonly ICameraInfoService _cameraInfoService;
+    private readonly ICameraService _cameraService; // <-- Add this
 
-    public MainPage(ITestService test, ICameraInfoService cameraInfoService)
+    public MainPage(ITestService test, ICameraInfoService cameraInfoService, ICameraService cameraService)
 	{
         InitializeComponent();
 
         _cameraInfoService = cameraInfoService;
+        _cameraService = cameraService;
 
         /*
         #if __ANDROID__

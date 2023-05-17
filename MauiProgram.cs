@@ -1,10 +1,10 @@
 ﻿using Camera.MAUI;
 using Microsoft.Extensions.Logging;
+using Viewfinder.Services;
 
 #if __ANDROID__
-using Viewfinder.Services;
-using Viewfinder.Platforms;
 using Viewfinder.Platforms.Android;
+using Viewfinder.Platforms;
 #endif
 
 namespace Viewfinder;
@@ -25,11 +25,11 @@ public static class MauiProgram
 #if __ANDROID__
 		builder.Services.AddTransient<ITestService, TestService>();
         builder.Services.AddTransient<ICameraInfoService, CameraInfoService>();
-		builder.Services.AddScoped<ICameraService, CameraService>();
-        
+        builder.Services.AddSingleton<ICameraService, Camera2Service>();
+
 
 #endif
-        builder.Services.AddScoped<MainPage>();
+        builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
